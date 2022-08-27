@@ -22,8 +22,8 @@ database.default.password = YOUR MYSQL PASSWORD</pre>
 
 ### Step 3: Import database
 
-Import the sql file in root named <pre>invoice_generator.sql</pre> to your database
+Import the sql file in root named <code>invoice_generator.sql</code> to your database
 
 ### Step 4: Run the application
 
-Run the application on <pre>localhost/{FOLDER_NAME}/</pre>
+Run the application on <code>localhost/{FOLDER_NAME}/</code>
