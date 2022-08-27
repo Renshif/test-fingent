@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Aug 26, 2022 at 10:30 PM
+-- Generation Time: Aug 27, 2022 at 09:47 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.26
 
@@ -29,8 +29,8 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `discounts` (
   `id` int(11) NOT NULL,
-  `discount_type` varchar(25) NOT NULL,
-  `discount_amount` decimal(16,5) NOT NULL,
+  `type` varchar(25) NOT NULL,
+  `amount` decimal(16,5) NOT NULL,
   `discounted_total` decimal(16,5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 

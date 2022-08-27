@@ -102,8 +102,8 @@ class Invoice extends BaseController
             $discountData['id'] = $discountDetails['id'];
           }
 
-          $discountData['discount_type']    = $postArray['discountType'];
-          $discountData['discount_amount']  = $postArray['discountAmount'];
+          $discountData['type']    = $postArray['discountType'];
+          $discountData['amount']  = $postArray['discountAmount'];
           $discountData['discounted_total'] = $totalAmount;
 
           $discountModel->save($discountData);

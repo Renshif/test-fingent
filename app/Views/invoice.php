@@ -134,11 +134,11 @@
             <?= !empty($validation) ? $validation->getError('name') : '' ?>
           </td>
           <td>
-            <input type="text" name="quantity" value="<?= !empty($validation) ? set_value('quantity') : (!empty($productDetails) ? number_format($productDetails['quantity'], 2) : '') ?>" class="form-control">
+            <input type="text" name="quantity" value="<?= !empty($validation) ? set_value('quantity') : (!empty($productDetails) ? number_format($productDetails['quantity'], 2, '.', '') : '') ?>" class="form-control">
             <?= !empty($validation) ? $validation->getError('quantity') : '' ?>
           </td>
           <td>
-            <input type="text" name="price" value="<?= !empty($validation) ? set_value('price')  : (!empty($productDetails) ? number_format($productDetails['price'], 2) : '') ?>" class="form-control">
+            <input type="text" name="price" value="<?= !empty($validation) ? set_value('price')  : (!empty($productDetails) ? number_format($productDetails['price'], 2, '.', '') : '') ?>" class="form-control">
             <?= !empty($validation) ? $validation->getError('price') : '' ?>
           </td>
           <td>
@@ -180,10 +180,10 @@
             foreach ($products as $product) : ?>
               <tr>
                 <td><?= $product['name'] ?></td>
-                <td class="text-center"><?= number_format($product['quantity'], 2) ?></td>
-                <td class="text-end"><?= number_format($product['price'], 2) ?></td>
+                <td class="text-center"><?= number_format($product['quantity'], 2, '.', '') ?></td>
+                <td class="text-end"><?= number_format($product['price'], 2, '.', '') ?></td>
                 <td class="text-center"><?= $product['tax'] ?></td>
-                <td class="text-end"><?= number_format($product['total_amount'], 2) ?></td>
+                <td class="text-end"><?= number_format($product['total_amount'], 2, '.', '') ?></td>
                 <td class="text-end">
                   <a href="<?= base_url('/?id=' . $product['id']) ?>" class="btn btn-info">Edit</a>
                   <a href="<?= base_url('delete-product/' . $product['id']) ?>" onclick="return confirm('Are you sure you want to delete this product?')" class="btn btn-danger">Delete</a>
@@ -209,25 +209,27 @@
             <tbody>
               <tr>
                 <td>Subtotal without tax</td>
-                <td colspan="2" class="text-end"><?= number_format($sumData['total_price'], 2) ?></td>
+                <td colspan="2" class="text-end"><?= number_format($sumData['total_price'], 2, '.', '') ?></td>
               </tr>
               <tr>
                 <td>Subtotal with tax</td>
-                <td colspan="2" class="text-end"><?= number_format($sumData['total_amount'], 2) ?></td>
+                <td colspan="2" class="text-end"><?= number_format($sumData['total_amount'], 2, '.', '') ?></td>
               </tr>
               <tr>
                 <td>Discount</td>
                 <td>
                   <select name="discountType" id="discountType" class="form-select">
-                    <option value="fixed" <?= !empty($discountDetails) && $discountDetails['discount_type'] == 'fixed' ? 'selected' : '' ?>>Fixed</option>
-                    <option value="percentage" <?= !empty($discountDetails) && $discountDetails['discount_type'] == 'percentage' ? 'selected' : '' ?>>Percentage</option>
+                    <option value="fixed" <?= !empty($discountDetails) && $discountDetails['type'] == 'fixed' ? 'selected' : '' ?>>Fixed</option>
+                    <option value="percentage" <?= !empty($discountDetails) && $discountDetails['type'] == 'percentage' ? 'selected' : '' ?>>Percentage</option>
                   </select>
                 </td>
-                <td><input type="text" name="discountAmount" id="discountAmount" value="<?= !empty($discountDetails) ? number_format($discountDetails['discount_amount'], 2) : '0' ?>" class="form-control text-end"></td>
+                <td>
+                  <input type="text" name="discountAmount" id="discountAmount" value="<?= !empty($discountDetails) ? ($discountDetails['type'] == 'percentage' ? number_format($discountDetails['amount']) : number_format($discountDetails['amount'], 2, '.', '')) : '0' ?>" class="form-control text-end">
+                </td>
               </tr>
               <tr>
                 <td>Total Amount</td>
-                <td colspan="2" class="text-end" id="totalAmount"><?= !empty($discountDetails) ? number_format($discountDetails['discounted_total'], 2) : '0' ?></td>
+                <td colspan="2" class="text-end" id="totalAmount"><?= !empty($discountDetails) ? number_format($discountDetails['discounted_total'], 2, '.', '') : '0' ?></td>
               </tr>
             </tbody>
           </table>
@@ -251,7 +253,7 @@
 
   <script>
     var base_url = '<?= base_url() ?>';
-    var totalWithTax = '<?= number_format($sumData['total_amount'], 2) ?>';
+    var totalWithTax = parseFloat(<?= $sumData['total_amount'] ?>).toFixed(2);
 
     $(document).ready(function() {
       calculateTotalAmount();

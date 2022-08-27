@@ -61,7 +61,7 @@
             </tr>
             <tr>
               <td>Discount</td>
-              <td class="text-end"><?= number_format($discountDetails['discount_amount'], 2) ?><?= $discountDetails['discount_type'] == 'percentage' ? '%' : '' ?></td>
+              <td class="text-end"><?= $discountDetails['type'] == 'percentage' ? number_format($discountDetails['amount']) . '%' : number_format($discountDetails['amount'], 2) ?></td>
             </tr>
             <tr>
               <td>Total Amount</td>

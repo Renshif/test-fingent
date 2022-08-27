@@ -15,8 +15,8 @@ class DiscountModel extends Model
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'discount_type',
-        'discount_amount',
+        'type',
+        'amount',
         'discounted_total',
     ];
 
