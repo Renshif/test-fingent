@@ -1,6 +1,7 @@
 # Invoice Generator
 
 ## Requirement
+
 PHP version 7.4 or higher is required
 
 ## Installation
@@ -13,12 +14,18 @@ Use the following command
 
 ### Step 2: Connect to database
 
-Open <code>.env</code> file in project root and provide your db credentials
+Open <code>app > Config > Database.php</code> and update your db credentials
 
-<pre>database.default.hostname = HOST NAME
-database.default.database = YOUR DATABASE NAME
-database.default.username = YOUR MYSQL USERNAME
-database.default.password = YOUR MYSQL PASSWORD</pre>
+<pre>
+'hostname' => 'HOST_NAME',
+'username' => 'YOUR_MYSQL_USERNAME',
+'password' => 'YOUR_MYSQL_PASSWORD',
+'database' => 'YOUR_DATABASE_NAME',
+</pre>
+
+### Step 3: Update your project base url
+
+Open <code>app > Config > App.php</code> and replace value of $baseURL with <code>http://localhost/FOLDER_NAME</code>
 
 ### Step 3: Import database
 
@@ -26,4 +33,4 @@ Import the sql file in root named <code>invoice_generator.sql</code> to your dat
 
 ### Step 4: Run the application
 
-Run the application on <code>localhost/{FOLDER_NAME}/</code>
+Run the application on <code>localhost/FOLDER_NAME/</code>
